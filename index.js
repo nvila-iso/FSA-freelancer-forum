@@ -5,9 +5,6 @@
  * @property {number} rate
  */
 
-// 4. Use that function to initialize a state variable which will store the average rate of all freelancers.
-// 5. Write a component function to represent a single freelancer.
-// 6. Write a component function to represent an array of freelancers.
 // 7. Write a component function to represent the average rate of all freelancers.
 // 8. Write and call a render function that will mount the application onto the document.
 
@@ -37,22 +34,76 @@ function makeFreelancer() {
 }
 
 // 2. Initialize a state variable to an array of NUM_FREELANCERS freelancer objects.
-const freelancers = [];
 
-for (let i = 0; i < NUM_FREELANCERS; i++) {
-  freelancers.push(makeFreelancer());
+function makeFreelancers() {
+  const freelancers = [];
+
+  for (let i = 0; i < NUM_FREELANCERS; i++) {
+    freelancers.push(makeFreelancer());
+  }
+
+  return freelancers;
 }
 
+const freelancers = makeFreelancers();
+// console.log(freelancers);
+
 // 3.  Write a function that returns the average rate of all freelancers in state.
-function getAverageRate() {
+function getAverageRate(state) {
   let sum = 0;
 
   for (let i = 0; i < NUM_FREELANCERS; i++) {
-    sum += freelancers[i].rate;
+    sum += state[i].rate;
   }
 
-  let averageRate = sum / NUM_FREELANCERS;
-  return averageRate;
+  let average = sum / state.length;
+  return average;
+}
+
+// 4. Use that function to initialize a state variable which will store the average rate of all freelancers.
+const averagerate = getAverageRate(freelancers);
+// console.log(averageRate);
+
+// 5. Write a component function to represent a single freelancer.
+function singleFreelancer(freelancer) {
+  // create row
+  //create td + add freelancer name
+  // repeat for occupation + rate
+  const row = document.createElement("tr");
+
+  const name = document.createElement("td");
+  name.textContent = freelancer.name;
+
+  const occ = document.createElement("td");
+  occ.textContent = freelancer.occupation;
+
+  const rate = document.createElement("td");
+  rate.textContent = "$" + freelancer.rate;
+
+  row.append(name);
+  row.append(occ);
+  row.append(rate);
+  return row;
+}
+
+// 6. Write a component function to represent an array of freelancers.
+function createTable(freelancers) {
+  const tableHeaders = ["NAME", "OCCUPATION", "RATE"];
+  const table = document.createElement("table");
+
+  const tableHead = document.createElement("thead");
+  table.append(tableHead);
+
+  const tableRow = document.createElement("tr");
+  tableHead.append(tableRow);
+
+  for (let header of tableHeaders) {
+    const tableHeader = document.createElement("th");
+    tableHeader.textContent = header;
+    tableRow.append(tableHeader);
+  }
+
+  return table;
 }
 
 function populatePage() {
@@ -64,12 +115,15 @@ function populatePage() {
 
   // average rate
   const averageRate = document.createElement("p");
-  averageRate.textContent = "The average rate is $" + getAverageRate();
+  averageRate.textContent = "The average rate is $" + averagerate;
   main.append(averageRate);
 
+  // table
   const tableDiv = document.createElement("div");
-  tableDiv.classList.add("freelance-table");
+  tableDiv.classList.add("table-space");
   main.append(tableDiv);
+  const table = createTable(freelancers);
+  tableDiv.append(table);
 }
 
 populatePage();

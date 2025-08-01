@@ -12,3 +12,19 @@ h1 {
 p {
   margin-top: 0;
 }
+
+.table-space {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  border: 1px solid black;
+  width: 90%;
+  border-radius: 0.2rem;
+}
+
+th {
+  text-decoration: underline;
+}
