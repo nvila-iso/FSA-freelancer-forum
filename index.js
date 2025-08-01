@@ -91,6 +91,7 @@ function createTable(freelancers) {
   const tableHeaders = ["NAME", "OCCUPATION", "RATE"];
   const table = document.createElement("table");
 
+  // TABLE HEAD
   const tableHead = document.createElement("thead");
   table.append(tableHead);
 
@@ -102,6 +103,19 @@ function createTable(freelancers) {
     tableHeader.textContent = header;
     tableRow.append(tableHeader);
   }
+
+  // TABLE BODY
+  const tableBody = document.createElement("tbody");
+
+  //iterate through freelancers
+  //    add the row from a singlefree lancer
+  //    add the row to the body
+  // make sure the body is appended to the table
+  for (let freelancer of freelancers) {
+    let newRow = singleFreelancer(freelancer);
+    tableBody.append(newRow);
+  }
+  table.append(tableBody);
 
   return table;
 }

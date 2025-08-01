@@ -2,6 +2,8 @@ body {
   max-width: 1080px;
   margin: 0 auto;
   text-align: center;
+  background-color: #282a36;
+  color: #f8f8f2;
 }
 
 h1 {
@@ -20,11 +22,29 @@ p {
 }
 
 table {
-  border: 1px solid black;
-  width: 90%;
+  border: 2px solid #6272a4;
+  width: 70%;
   border-radius: 0.2rem;
+  margin-bottom: 5rem;
 }
 
 th {
   text-decoration: underline;
+  padding: 0.5rem;
+}
+
+thead {
+  background-color: rgba(98, 114, 164, 0.3);
+}
+
+tbody td {
+  padding: 0.3rem;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(98, 114, 164, 0.1);
+}
+
+tbody tr:hover {
+  background-color: rgba(189, 147, 249, 0.3);
 }
